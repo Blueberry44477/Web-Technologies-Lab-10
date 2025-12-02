@@ -5,7 +5,7 @@ html(lang="en")
             meta(charset="utf-8")
             meta(name="viewport" content="width=device-width, initial-scale=1")
         block title
-            title Vite Pug Template
+            title Лабораторна робота 10 - Pug, SASS, Vite.
         block fonts
         block main-scripts
         block styles
@@ -13,9 +13,8 @@ html(lang="en")
     body
         block data
         block header
-            header.page-header header
-        block content
-            main.page-main content
+            include ../components/header/header
+        block main
         block footer
-            footer.page-footer footer
+            include ../components/footer/footer
         block add-scripts

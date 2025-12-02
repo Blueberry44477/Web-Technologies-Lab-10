@@ -1,15 +1,225 @@
-@use '../utils/mixins' as *;
+@use '/src/styles/utils/mixins' as *;
 
 .header {
-  // declare mixins before styles
+    position: sticky;
+    top: 0;
 
-  @include flex-center;
-  background: var(--color-primary);
-  color: white;
-  padding: 1rem;
-  text-align: center;
+    @include flex-row($justify: space-between);
+    padding: 10px 10px;
+    z-index: 10;
+    background-color: white;
 
-  h1 {
-    font-size: 2rem;
-  }
+    &__logo {
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    .header__burger-toggle { display: none; }
+    
+    .header__burger-icon { 
+        position: relative; 
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+        }
+
+        &,
+        &::before,
+        &::after {
+            width: 30px;
+            height: 3px;
+            background-color: var(--main-color);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        &::before { top: -8px; }
+        &::after { top: 8px; }
+    }
+    
+    .header__burger-toggle:checked ~ .header__nav {
+        display: block;
+    }
+    
+    .header__burger-toggle:checked + .header__burger-icon {
+        background: transparent;
+    }
+    
+    .header__burger-toggle:checked + .header__burger-icon::before {
+        transform: rotate(45deg) translate(6px, 5px);
+    }
+    
+    .header__burger-toggle:checked + .header__burger-icon::after {
+        transform: rotate(-45deg) translate(6px, -5px);
+    }
+
+    &__burger {
+        &:checked {
+            &-icon {
+
+                &::before {
+
+                }
+
+                &::after {
+
+                }
+            }
+        }
+    }
+
+    &__nav {
+
+
+    }
+
+    &__nav-list {
+
+    }
+
+    &__nav-item {
+
+    }
+    
+    .header__nav {
+        position: absolute;
+        display: none;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        
+        background-color: white;
+        border-radius: 0 0 10px 10px;
+        transition: all 0.2s ease;
+    
+        .header__nav-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            width: 100%;
+            padding: 10px 0;
+            list-style: none;
+    
+            .header__nav-item {
+                margin: 0 10px;
+
+                a {
+                    @include flex-row($align: center);
+                    padding: 25px 20px;
+                    border-radius: 10px;
+
+                    text-decoration: none;
+                    color: #333;
+                    font-size: 1.2rem;
+
+                    &:hover {
+                        background-color: var(--main-color);
+                        color: white;
+                        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+                        transform: translateY(-2px);
+                    }
+
+                    &:active {
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+                        transform: scale(0.97); 
+                    }
+                }
+            }
+            
+            .header__nav-item-fav {
+                a {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+
+                    padding: 5px;
+                    margin: 0 10px;
+                    border-radius: 10px;
+                    box-shadow: 0 0 0 2px var(--main-color);
+                    transition: all 0.2s ease;
+
+                    img {
+                        background-color: var(--main-color);
+                        padding: 10px;
+                        border-radius: 50%;
+                    }
+
+                    &:hover {
+                        box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
+                    }
+                    
+                    &:active {
+                        background-color: white;
+                        transform: scale(0.9); 
+                    }
+                }
+            }
+        }
+    }
+
+    @include tablet {
+        margin-top: 10px;
+
+        .header__logo {
+            height: 40px;
+        }
+
+        .header__burger-icon { display: none; }
+
+        .header__nav {
+            position: initial;
+            display: flex;
+            width: initial;
+
+            .header__nav-list {
+                flex-direction: row;
+                
+                .header__nav-item {
+                    margin: 0;
+                    a {
+                        height: 30px;
+                        font-size: 1rem; 
+                    }
+                }
+
+                .header__nav-item-fav {
+                    border: none;
+
+                    a {
+                        background-color: var(--main-color);
+                        margin-right: 0;
+                        padding: 25px;
+                        width: 30px;
+                        height: 30px;
+                        box-shadow: none;
+
+                        img {
+                            background-color: none;
+                            padding: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @include desktop {
+        .header__logo {
+            height: 60px;
+            width: 60px;
+        }
+    
+        .header__nav {
+            .header__nav-list {
+                .header__nav-item-fav a,
+                .header__nav-item a {
+                    padding: 30px;
+                }
+            }
+        }
+    }
 }

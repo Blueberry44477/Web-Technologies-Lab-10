@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@vituum/vite-plugin-pug": "^1.1.0",
+    "pug-cli": "^1.0.0-alpha6",
     "sass": "^1"
   }
 }
